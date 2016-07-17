@@ -27,5 +27,9 @@ public class LambdaFunction {
 		}
 		return mapInputtoOutput;
 	}
+	
+	public void covertOneObjecttoAnother(){
+		
+	}
 
 }
