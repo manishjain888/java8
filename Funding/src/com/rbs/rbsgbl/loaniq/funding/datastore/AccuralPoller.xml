@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="LOANIQ_ACCURAL">
+
+     <resultMap id="AccuralRequest" class="com.rbs.rbsgbl.loaniq.funding.datastore.data.FundReq">					
+			<result resultMap="LOANIQ_ACCURAL.ostCOF" property="ostCOF" />
+	</resultMap>
+					
+	<resultMap id="ostCOF" class="com.rbs.rbsgbl.loaniq.funding.datastore.data.OstCOF">
+		<result column="TXN_CLASS_TYPE" property="transClassType" jdbcType="VARCHAR" />
+		<result column="TXN_BRANCH" property="transBranch" jdbcType="VARCHAR" />
+		<result column="TXN_EXPENSE" property="transExpense" jdbcType="VARCHAR" />		
+		<result column="TXN_PORTFOLIO" property="transPortfolio" jdbcType="VARCHAR" />		
+		<result column="TXN_AMOUNT" property="transAmount" jdbcType="VARCHAR" />		
+		<result column="TXN_RATE" property="transRate" jdbcType="VARCHAR" />		
+		<result column="TXN_DEAL" property="transDeal" jdbcType="VARCHAR" />		
+		<result column="TXN_DEAL_NAME" property="transDealName" jdbcType="VARCHAR" />		
+		<result column="TXN_FACILITY" property="transFacility" jdbcType="VARCHAR" />		
+		<result column="TXN_FACILITY_NAME" property="transFacilityName" jdbcType="VARCHAR" />		
+		<result column="TXN_CURRENCY" property="transCurrency" jdbcType="VARCHAR" />		
+		<result column="TXN_BORROWER" property="transBorrowwer" jdbcType="VARCHAR" />		
+		<result column="TXN_BORR_NAME" property="transBorrowwerName" jdbcType="VARCHAR" />		
+		<result column="TXN_BORR_SHORT" property="transBorrowwerShortName" jdbcType="VARCHAR" />
+		<result column="TXN_SERVICING_GROUP" property="transServGroup" jdbcType="VARCHAR" />
+		<result column="TXN_COF_RID" property="transCOFRID" jdbcType="VARCHAR" />
+		<result column="TXN_STATUS" property="transStatus" jdbcType="VARCHAR" />
+		<result column="TXN_TYPE" property="transType" jdbcType="VARCHAR" />
+		<result column="TXN_TYPE_DESC" property="transTypeDesc" jdbcType="VARCHAR" />
+		<result column="TXN_GROUP_TYPE" property="transGroupType" jdbcType="VARCHAR" />
+		<result column="TXN_EFFECTIVE_DATE" property="transEffDate" jdbcType="TIMESTAMP" />
+		<result column="TXN_REPRICING_DATE" property="transRepriceDate" jdbcType="TIMESTAMP" />
+		<result column="TXN_ID" property="transID" jdbcType="VARCHAR" />
+		<result column="TXN_LINK_ID" property="transLinkID" jdbcType="VARCHAR" />
+		<result column="TXN_GROUP_ID" property="transGroupID" jdbcType="VARCHAR" />
+		<result column="TXN_FUNDING_TYPE" property="transFundType" jdbcType="VARCHAR" />
+		<result column="TXN_REVIEW" property="transReview" jdbcType="VARCHAR" />
+		<result column="TXN_COMMENT" property="tramsComment" jdbcType="VARCHAR" />
+		<result column="TXN_TOTAL_AMT" property="transTotalAmt" jdbcType="VARCHAR" />
+		<result column="TXN_TSP" property="transTimeStamp" jdbcType="TIMESTAMP" />
+		<result column="TXN_UID" property="transUID" jdbcType="VARCHAR" />
+		<result column="TXN_RISK_TYPE" property="transRiskType" jdbcType="VARCHAR" />
+		<result column="OST_EFFECTIVE_DATE" property="ostEffDate" jdbcType="TIMESTAMP" />
+		<result column="OST_REPRICING_DATE" property="ostRepriceDate" jdbcType="TIMESTAMP" />
+		<result column="OST_REPRICE_FREQ" property="ostRepriceFreq" jdbcType="VARCHAR" />
+		<result column="OST_TYPE" property="ostType" jdbcType="VARCHAR" />
+		<result column="OST_RID" property="ostRID" jdbcType="VARCHAR" />
+		<result column="OST_PRICE_OPT" property="ostPriceOpt" jdbcType="VARCHAR" />
+		<result column="OST_HB_RATE_BASIS" property="ostHBRateBasis" jdbcType="VARCHAR" />
+		<result column="OST_ALIAS" property="ostAlias" jdbcType="VARCHAR" />
+		<result column="OST_MAT_DATE" property="ostMatDate" jdbcType="VARCHAR" />
+		<result column="OST_ACCRUAL_PERIOD" property="ostAccuralPeriod" jdbcType="VARCHAR" />
+		<result column="OST_ACCRUAL_RULE" property="ostAccuralRule" jdbcType="VARCHAR" />
+		<result column="OST_NON_BUSINESS_DAY_RULE" property="ostNonBussDayRule" jdbcType="VARCHAR" />
+		<result column="OST_RATE_SET_DAYS_IN_ADVANCE" property="ostRateSetDaysInAdv" jdbcType="VARCHAR" />
+		<result column="OST_ACCRUAL_CYCLE_DUE" property="ostAccuralCycleDue" jdbcType="TIMESTAMP" />
+		<result column="OST_ACCRUAL_CYCLE_ADJ" property="ostAccuralCycleAdj" jdbcType="TIMESTAMP" />
+		<result column="OST_ACCRUAL_CYCLE_END" property="ostAccuralCycleEnd" jdbcType="TIMESTAMP" />
+		<result column="OST_HB_BANK_NET" property="ostHBBankNet" jdbcType="VARCHAR" />
+		<result column="DEAL_TEAM" property="dealAdministrator" jdbcType="VARCHAR" />
+		<result column="OST_SPREAD" property="ostSpread" jdbcType="VARCHAR" />
+		<result column="BUS_DATE" property="currentBussDate" jdbcType="TIMESTAMP" />
+		<result column="FAC_TXN_ID" property="facTransID" jdbcType="VARCHAR" />
+		<result column="FAC_TXN_TYPE" property="facTransType" jdbcType="VARCHAR" />
+		<result column="FAC_TXN_TYPE_DESC" property="facTransTypeDesc" jdbcType="VARCHAR" />
+		<result column="FAC_TXN_CIRCLE_ID" property="facTransCircleID" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	
+	<select id="fetchAccuralList" parameterClass="hashmap" resultMap="LOANIQ_ACCURAL.AccuralRequest" >
+			
+		SELECT		
+		    'ACR_PMT_TRAN'         AS TXN_CLASS_TYPE,
+		    APP_CDE_BRANCH         AS TXN_BRANCH,
+		    APP_CDE_EXPENSE        AS TXN_EXPENSE,
+		    APP_CDE_PORTFOLIO      AS TXN_PORTFOLIO,
+		    APP_AMT_BOOK           AS TXN_AMOUNT,
+		    ORT_PCT_BASE_RATE + ORT_PCT_SPREAD  AS TXN_RATE,
+		    OST_PID_DEAL           AS TXN_DEAL,
+		    DEA_NME_DEAL           AS TXN_DEAL_NAME,
+		    OST_PID_FACILITY       AS TXN_FACILITY,
+		    FAC_NME_FACILITY       AS TXN_FACILITY_NAME,
+		    OST_CDE_CURRENCY       AS TXN_CURRENCY,
+		    OST_CID_BORROWER       AS TXN_BORROWER,
+		    CUS_NME_FULL_NAME      AS TXN_BORR_NAME,
+		    CUS_NME_SHORT_NAME     AS TXN_BORR_SHORT,
+		    APP_RID_LENDER_SG      AS TXN_SERVICING_GROUP,    
+		    NULL                   AS TXN_COF_RID,    
+		    ACP_CDE_OBJ_STATE      AS TXN_STATUS,
+		    ACP_CDE_PMT_TYPE       AS TXN_TYPE,
+		    EVT_DSC.GB2_CDE_CODE   AS TXN_TYPE_DESC,
+		    ACP_CDE_GROUP_TYPE     AS TXN_GROUP_TYPE,    
+		    ACP_DTE_EFFECTIVE      AS TXN_EFFECTIVE_DATE,
+		    NULL                   AS TXN_REPRICING_DATE,
+		    ACP_RID_ACR_CY_PMT     AS TXN_ID,
+		    NULL				   AS TXN_LINK_ID,
+		    ACP_RID_GROUP_TRAN     AS TXN_GROUP_ID,
+		    NULL                   AS TXN_FUNDING_TYPE,    
+		    NULL                   AS TXN_REVIEW,
+		    TRE_TXT_COMMENT        AS TXN_COMMENT,
+		    0                      AS TXN_TOTAL_AMT,
+		    ACP_TSP_REC_UPDATE     AS TXN_TSP,
+		    ACP_UID_REC_UPDATE     AS TXN_UID,
+		
+		    OST_CDE_RISK_TYPE     AS TXN_RISK_TYPE,
+		    COALESCE (ACC_DTE_CYCLE_STRT, OST_DTE_EFFECTIVE) AS OST_EFFECTIVE_DATE,	
+		    COALESCE(OST_DTE_REPRICING, OST_DTE_EXPIRY_FNL) AS OST_REPRICING_DATE,
+		    OST_CDE_REPR_FREQ     AS OST_REPRICE_FREQ,
+		    OST_CDE_OUTSTD_TYP    AS OST_TYPE,    
+		    OST_RID_OUTSTANDNG    AS OST_RID,
+		    OST_CDE_PRICE_OPT     AS OST_PRICE_OPT,
+		    ORT_PCT_SPREAD        AS OST_SPREAD,
+		    ORT_CDE_MFCF_RT_BS    AS OST_HB_RATE_BASIS,
+		    OST_NME_ALIAS         AS OST_ALIAS,    
+		    <![CDATA[ 	
+		    CASE WHEN OST_IND_HAS_RPR_DT = 'N' THEN OST_DTE_EXPIRY_FNL
+	     	ELSE OST_DTE_REPRICING
+			END 			 AS OST_MAT_DATE,
+			]]>
+		    ACR_DSC.GB2_CDE_CODE AS OST_ACCRUAL_PERIOD,
+		    CASE WHEN OST_CDE_ENDTE_RULE = 'TOAC' THEN 'To the actual due date'
+		               WHEN OST_CDE_ENDTE_RULE = 'TOAD' THEN 'To the adjusted due date'
+		               WHEN OST_CDE_ENDTE_RULE = 'THRAC' THEN 'Thru the actual due date'
+		               WHEN OST_CDE_ENDTE_RULE = 'THRAD' THEN 'Thru the adjusted due date'
+		    END             
+		    AS OST_ACCRUAL_RULE,
+		    IPO_CDE_NONBUS_DAY     AS OST_NON_BUSINESS_DAY_RULE,
+		    IPO_NUM_SET_FREQ      AS OST_RATE_SET_DAYS_IN_ADVANCE,
+		    ACC_DTE_CYCLE_STRT	AS OST_ACCRUAL_CYCLE_STRT,
+		    ACC_DTE_CYCLE_DUE     AS OST_ACCRUAL_CYCLE_DUE,
+		    ACC_DTE_ADJ_CYCLE     AS OST_ACCRUAL_CYCLE_ADJ,
+		    ACC_DTE_CYCLE_END     AS OST_ACCRUAL_CYCLE_END,
+		    OST_AMT_BANK_NET     AS OST_HB_BANK_NET,
+		    DEA_UID_ADMNSTRATR	 AS DEAL_TEAM,
+		    BDT_DTE_BUSINESS	AS BUS_DATE,
+		     NULL             AS FAC_TXN_ID,
+            NULL             AS FAC_TXN_TYPE,
+            NULL             AS FAC_TXN_TYPE_DESC,
+            NULL             AS FAC_TXN_CIRCLE_ID
+		FROM 
+		    VLS_ACCR_CYCLE_PMT
+		    LEFT OUTER JOIN VLS_FAM_GLOBAL2 EVT_DSC ON
+		    ACP_CDE_PMT_TYPE = EVT_DSC.GB2_CDE_CODE AND
+		    EVT_DSC.GB2_TID_TABLE_ID = 'ACT'
+					
+		    LEFT OUTER JOIN VLS_TRANSIT_EVENT ON
+		    ACP_RID_ACR_CY_PMT = TRE_RID_OBJECT AND
+		    TRE_CDE_ACTION = 'NEW'    
+		
+		    INNER JOIN VLS_ACR_CYC_PMT_PT ON
+		    ACP_RID_ACR_CY_PMT = APP_RID_ACR_CY_PMT AND
+		    ACP_CDE_OWNER_TYPE = 'OST'
+		      
+		       INNER JOIN VLS_OUTSTANDING ON
+		    ACP_RID_OWNER = OST_RID_OUTSTANDNG AND
+		    OST_CDE_PRICE_OPT = 'FIXLT' AND
+		    ACP_CDE_OBJ_STATE IN ('LWREL', 'RELSD') AND
+		    ACP_CDE_PMT_TYPE IN ('OPMT', 'ROPMT') 
+		    
+		    LEFT OUTER JOIN VLS_FAM_GLOBAL2 ACR_DSC ON
+		    OST_CDE_ACR_PERIOD = ACR_DSC.GB2_CDE_CODE AND
+		    ACR_DSC.GB2_TID_TABLE_ID = 'APD'
+		    
+		    INNER JOIN (
+		        SELECT 
+		            ACC_RID_OWNER,
+		            MAX(ACC_DTE_CYCLE_STRT) AS ACC_DTE_CYCLE_STRT,
+		            MAX (ACC_DTE_CYCLE_DUE) AS ACC_DTE_CYCLE_DUE,
+		               MAX (ACC_DTE_ADJ_CYCLE) AS ACC_DTE_ADJ_CYCLE,
+		               MAX (ACC_DTE_CYCLE_END) AS ACC_DTE_CYCLE_END
+		        FROM
+		            VLS_ACCRUAL_CYCLE
+		        GROUP BY
+		            ACC_RID_OWNER 
+		    ) ON OST_RID_OUTSTANDNG = ACC_RID_OWNER
+				
+			INNER JOIN RBSGBL_BASELINE_IMAGE HIST ON
+			OST_RID_OUTSTANDNG = HIST.BIT_RID_OUTSTANDNG
+							
+		    LEFT OUTER JOIN VLS_INT_PRC_OPTION ON
+		    OST_CDE_PRICE_OPT = IPO_CDE_OPTION AND
+		    OST_PID_DEAL = IPO_PID_DEAL    
+		    
+		    LEFT OUTER JOIN VLS_OST_RATES ON
+		    OST_RID_OUTSTANDNG = ORT_RID_OUTSTANDNG
+		    
+		    LEFT OUTER JOIN VLS_CUSTOMER ON
+		    OST_CID_BORROWER = CUS_CID_CUST_ID
+		
+		    LEFT OUTER JOIN VLS_DEAL ON
+		    OST_PID_DEAL = DEA_PID_DEAL
+		
+		    LEFT OUTER JOIN VLS_FACILITY ON
+		    OST_PID_FACILITY = FAC_PID_FACILITY   
+		    
+		 
+		    LEFT OUTER JOIN VLS_BRANCH ON
+			APP_CDE_BRANCH = BRN_CDE_BRANCH
+
+			LEFT OUTER JOIN VRP_BUS_DATES ON
+			BRN_CDE_TME_REGION = BDT_CDE_TME_REGION AND
+			BDT_TXT_TYPE = 'Current Business Date'  		    	    		
+			
+		    WHERE	
+			<![CDATA[ 					 				
+			   	OST_IND_MATCH_FUND = 'Y'      			 	 				
+				AND ACP_DTE_EFFECTIVE BETWEEN OST_DTE_EFFECTIVE AND  COALESCE(OST_DTE_REPRICING, OST_DTE_EXPIRY_FNL)
+				AND ACP_TSP_REC_UPDATE >= #accPollerTime# 
+			]]>
+				
+    </select>       
+
+</sqlMap>		

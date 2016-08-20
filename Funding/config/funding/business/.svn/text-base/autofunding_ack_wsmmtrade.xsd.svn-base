@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="MMTRADE_RESPONSE" type="mmresp_type" />
+    <xsd:complexType name="mmresp_type">
+        <xsd:sequence>
+            <xsd:element name="fill02" type="xsd:string" minOccurs="0" />
+            <xsd:element name="external_number" type="xsd:string" minOccurs="0" />
+            <xsd:element name="fill04" type="xsd:string" minOccurs="0" />
+            <xsd:element name="wss_internal_number" type="xsd:string" minOccurs="0" />
+            <xsd:element name="status" type="xsd:string" minOccurs="0" />
+            <xsd:element name="message" type="xsd:string" minOccurs="0" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

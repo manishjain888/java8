@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/7277/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/data
+END
+COFSharePercentageDTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/data/COFSharePercentageDTO.java
+END
+BaseLinePortfolio.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/data/BaseLinePortfolio.java
+END
+FetchWSSExternalTradeDTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/7277/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/data/FetchWSSExternalTradeDTO.java
+END
+FundMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/7277/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/data/FundMapper.java
+END
+FundMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/7277/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/data/FundMessage.java
+END
+WSSMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/data/WSSMapper.java
+END
+FundReq.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/data/FundReq.java
+END
+AutoFund.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/7277/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/data/AutoFund.java
+END
+FundStaticParam.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/data/FundStaticParam.java
+END
+AmdTransComment.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/data/AmdTransComment.java
+END
+FundPortfolioHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/data/FundPortfolioHistory.java
+END
+OstCOF.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/data/OstCOF.java
+END
+FundHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/data/FundHistory.java
+END

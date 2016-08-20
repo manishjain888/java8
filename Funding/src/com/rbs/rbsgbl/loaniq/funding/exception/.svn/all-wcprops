@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/4222/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/exception
+END
+AutoFundingException.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/exception/AutoFundingException.java
+END
+MessageSenderException.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/exception/MessageSenderException.java
+END

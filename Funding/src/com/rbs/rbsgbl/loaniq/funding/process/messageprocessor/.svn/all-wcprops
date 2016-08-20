@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/4222/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/process/messageprocessor
+END
+AutoFundingAckProcessor.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/!svn/ver/3901/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/process/messageprocessor/AutoFundingAckProcessor.java
+END
+AbstractMessageProcessor.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/process/messageprocessor/AbstractMessageProcessor.java
+END
+AutoFundingMessageProcessor.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/process/messageprocessor/AutoFundingMessageProcessor.java
+END

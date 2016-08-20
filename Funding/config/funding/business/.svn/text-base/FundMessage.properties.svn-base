@@ -1,0 +1,5 @@
+### Key attribute defined for Funding Interface################################
+fundMessage.staticDataCodeCount=8
+FUND_EXCEL_PATH=\\\\ServerName\\FUNDING_OUTPUT\\Input\\
+FUND_EXCEL_ARCHIVE_PATH=\\\\ServerName\\FUNDING_OUTPUT\\archive\\
+fundMessage.e_autoFundingArgonMessageXSD=

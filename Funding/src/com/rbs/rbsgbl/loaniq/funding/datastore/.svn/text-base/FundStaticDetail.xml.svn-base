@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE sqlMap 
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="LOANIQ_STATIC_DETAILS">
+
+	<resultMap id="staticMap" class="com.rbs.rbsgbl.loaniq.funding.datastore.data.FundStaticParam">
+		<result column="STATIC_TYPE_ID" property="staticTypeId" jdbcType="VARCHAR"/> 
+		<result column="STATIC_VALUE_1" property="staticValue1" jdbcType="VARCHAR"/> 
+		<result column="STATIC_VALUE_2" property="staticValue2" jdbcType="VARCHAR"/> 
+		<result column="STATIC_VALUE_3" property="staticValue3" jdbcType="VARCHAR"/> 
+		<result column="KEY_VALUE_1" property="keyValue1" jdbcType="VARCHAR"/> 
+		<result column="KEY_VALUE_2" property="keyValue2" jdbcType="VARCHAR"/> 
+	 </resultMap>
+	 
+
+	 <select id="StaticListFND01" resultMap="staticMap">
+		select trim(STATIC_TYPE_ID) STATIC_TYPE_ID ,trim(STATIC_VALUE_1) STATIC_VALUE_1 ,trim(STATIC_VALUE_2) STATIC_VALUE_2,trim(STATIC_VALUE_3) STATIC_VALUE_3 ,trim(KEY_VALUE_1) KEY_VALUE_1,trim(KEY_VALUE_2) KEY_VALUE_2 from rbsgbl_static_details where static_type_id = 'FND01'
+	</select>
+	
+	<select id="StaticListFND02" resultMap="staticMap">
+		select trim(STATIC_TYPE_ID) STATIC_TYPE_ID ,trim(STATIC_VALUE_1) STATIC_VALUE_1 ,trim(STATIC_VALUE_2) STATIC_VALUE_2,trim(STATIC_VALUE_3) STATIC_VALUE_3 ,trim(KEY_VALUE_1) KEY_VALUE_1,trim(KEY_VALUE_2) KEY_VALUE_2 from rbsgbl_static_details where static_type_id = 'FND02'
+	</select>
+	
+	<select id="StaticListFND03" resultMap="staticMap">
+		select trim(STATIC_TYPE_ID) STATIC_TYPE_ID ,trim(STATIC_VALUE_1) STATIC_VALUE_1 ,trim(STATIC_VALUE_2) STATIC_VALUE_2,trim(STATIC_VALUE_3) STATIC_VALUE_3 ,trim(KEY_VALUE_1) KEY_VALUE_1,trim(KEY_VALUE_2) KEY_VALUE_2 from rbsgbl_static_details where static_type_id = 'FND03'
+	</select>
+	
+	<select id="StaticListFND04" resultMap="staticMap">
+		select trim(STATIC_TYPE_ID) STATIC_TYPE_ID ,trim(STATIC_VALUE_1) STATIC_VALUE_1 ,trim(STATIC_VALUE_2) STATIC_VALUE_2,trim(STATIC_VALUE_3) STATIC_VALUE_3 ,trim(KEY_VALUE_1) KEY_VALUE_1,trim(KEY_VALUE_2) KEY_VALUE_2 from rbsgbl_static_details where static_type_id = 'FND04'
+	</select>
+	
+	<select id="StaticListFND05" resultMap="staticMap">
+		select trim(STATIC_TYPE_ID) STATIC_TYPE_ID ,trim(STATIC_VALUE_1) STATIC_VALUE_1 ,trim(STATIC_VALUE_2) STATIC_VALUE_2,trim(STATIC_VALUE_3) STATIC_VALUE_3 ,trim(KEY_VALUE_1) KEY_VALUE_1,trim(KEY_VALUE_2) KEY_VALUE_2 from rbsgbl_static_details where static_type_id = 'FND05'
+	</select>
+	
+	<select id="StaticListFND06" resultMap="staticMap">
+		select trim(STATIC_TYPE_ID) STATIC_TYPE_ID ,trim(STATIC_VALUE_1) STATIC_VALUE_1 ,trim(STATIC_VALUE_2) STATIC_VALUE_2,trim(STATIC_VALUE_3) STATIC_VALUE_3 ,trim(KEY_VALUE_1) KEY_VALUE_1,trim(KEY_VALUE_2) KEY_VALUE_2 from rbsgbl_static_details where static_type_id = 'FND06'
+	</select>
+	
+	<select id="StaticListFND07" resultMap="staticMap">
+		select trim(STATIC_TYPE_ID) STATIC_TYPE_ID ,trim(STATIC_VALUE_1) STATIC_VALUE_1 ,trim(STATIC_VALUE_2) STATIC_VALUE_2,trim(STATIC_VALUE_3) STATIC_VALUE_3 ,trim(KEY_VALUE_1) KEY_VALUE_1,trim(KEY_VALUE_2) KEY_VALUE_2 from rbsgbl_static_details where static_type_id = 'FND07'
+	</select>
+	
+	<select id="StaticListFND08" resultMap="staticMap">
+		select trim(STATIC_TYPE_ID) STATIC_TYPE_ID ,trim(STATIC_VALUE_1) STATIC_VALUE_1 ,trim(STATIC_VALUE_2) STATIC_VALUE_2,trim(STATIC_VALUE_3) STATIC_VALUE_3 ,trim(KEY_VALUE_1) KEY_VALUE_1,trim(KEY_VALUE_2) KEY_VALUE_2 from rbsgbl_static_details where static_type_id = 'FND08'
+	</select>
+	  
+	 <select id="StaticListForExcel" resultMap = "staticMap">
+	   select trim(STATIC_TYPE_ID) STATIC_TYPE_ID ,trim(STATIC_VALUE_1) STATIC_VALUE_1 ,trim(STATIC_VALUE_2) STATIC_VALUE_2,trim(STATIC_VALUE_3) STATIC_VALUE_3 ,trim(KEY_VALUE_1) KEY_VALUE_1,trim(KEY_VALUE_2) KEY_VALUE_2 from rbsgbl_static_details where static_type_id like '%FND_M%' 
+	 </select>
+	  
+	  
+</sqlMap>

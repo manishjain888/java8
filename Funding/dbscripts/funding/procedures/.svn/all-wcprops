@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/5970/funding/trunk/dbscripts/funding/procedures
+END
+rbsgbl_proc_fund_dealer_list.sql
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/3014/funding/trunk/dbscripts/funding/procedures/rbsgbl_proc_fund_dealer_list.sql
+END
+rbsgbl_proc_fund_auto_cmnt.sql
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3014/funding/trunk/dbscripts/funding/procedures/rbsgbl_proc_fund_auto_cmnt.sql
+END
+rbsgbl_proc_fund_narrative.sql
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/5905/funding/trunk/dbscripts/funding/procedures/rbsgbl_proc_fund_narrative.sql
+END
+rbsgbl_proc_fund_auto_conf.sql
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3014/funding/trunk/dbscripts/funding/procedures/rbsgbl_proc_fund_auto_conf.sql
+END
+rbsgbl_proc_fund_amend_cmnt.sql
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/3014/funding/trunk/dbscripts/funding/procedures/rbsgbl_proc_fund_amend_cmnt.sql
+END
+rbsgbl_proc_fund_lock_record.sql
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/3014/funding/trunk/dbscripts/funding/procedures/rbsgbl_proc_fund_lock_record.sql
+END

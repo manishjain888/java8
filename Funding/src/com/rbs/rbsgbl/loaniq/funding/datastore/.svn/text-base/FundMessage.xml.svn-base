@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE sqlMap 
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="LoanIQ_FundMessage">
+    
+    <insert id="persistFundMessage" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.FundMessage">		
+		
+		INSERT INTO RBSGBL_FUNDING_STAGE(
+			FST_CDE_TXN_CLASS, FST_CDE_BRANCH, FST_CDE_EXPENSE, FST_CDE_PORTFOLIO, FST_AMT_FUND, 
+			FST_PCT_RATE, FST_PID_DEAL, FST_NME_DEAL, FST_PID_FACILITY, FST_NME_FACILITY, 
+			FST_CDE_CURRENCY, FST_CID_BORROWER, FST_NME_FULL_NAME, FST_NME_SHORT_NAME, FST_TXN_COF_RID,
+			FST_RID_CUS_SVC_GR, FST_CDE_OBJ_STATE, FST_CDE_TR_TYPE, FST_NME_TR_TYPE, FST_CDE_TR_GROUP_TYPE,
+			FST_DTE_TR_EFFECTIVE, FST_DTE_TR_REPRICING, FST_RID_TRAN, FST_RID_LINK_TRAN,FST_RID_GROUP_TRAN, FST_CDE_FUNDG_TYPE,
+			FST_CDE_REVIEW, FST_TXT_COMMENT, FST_AMT_TR, FST_TSP_REC_UPDATE, FST_UID_REC_UPDATE, 
+			FST_CDE_RISK_TYPE, FST_DTE_EFFECTIVE, FST_DTE_REPRICE, FST_CDE_REPR_FQ, FST_CDE_OST_TYPE, 
+			FST_RID_OUTSTANDNG, FST_CDE_OPTION, FST_PCT_SPREAD, FST_CDE_HB_RT_BS, FST_CDE_WSS_RATE_BASIS,
+			FST_NME_ALIAS, FST_DTE_MATURITY, FST_CDE_ACR_PERIOD, FST_CDE_ENDTE_RULE, FST_CDE_NONBUS_DAY, 
+			FST_NUM_SET_FREQ, FST_DTE_CYCLE_DUE, FST_DTE_ADJ_CYCLE, FST_DTE_CYCLE_END, FST_AMT_BANK_NET,
+			FST_RID_FAC_TXN_ID, FST_CDE_FAC_TXN_TYPE, FST_NME_FAC_TXN_TYPE, FST_IID_INV_ID, FST_CDE_IDE_TRANS_TYPE,
+			FST_WSS_TRADE_REF, FST_CDE_PROCESS_QUEUE, FST_IND_AF_MSG_PROCESS, FST_IND_BREAK_FUND,
+			FST_AMT_BREAK_FUND_FEE, FST_IND_DEALER_LIST, FST_NUM_VERSION, FST_CDE_AMEND_STATUS,
+			FST_CDE_RISK_BOOK, FST_DSC_RISK_BOOK, FST_WSS_INT_ID, FST_WSS_CITY_CDE, FST_WSS_CPTY_ID, 
+			FST_WSS_PROD_TYPE, FST_WSS_BUS_AREA, FST_WSS_PORTFOLIO, FST_RID_FUND_REQ, FST_WSS_EXT_TRADE_ID,
+			FST_TXT_PREV_VALUE, FST_UID_AMEND_STATUS, FST_TSP_AMEND_STATUS, FST_IND_REC_LOCK,FST_WSS_MAP_REF,
+			FST_CDE_TEAM,FST_DTE_BUSINESS,FST_AMT_INTEREST,FST_WSS_STUB_REF,FST_WSS_PREV_TRADE_REF
+			)
+			VALUES 
+			(#transClassType#,#branchCode#,#expenseCode#,#portfolioCode#,#fundAmount#,#pctRate#,#dealPID#,
+			#dealName#,#facilityPID#,#facilityName#,#currencyCode#,#borrowerCode#,#borrowerFullName#,
+			#borrowerShortName#,TRIM(#transCOFRID:VARCHAR#),#borrowerServiceGroup#,#transStatus#,#transTypeCode#,#transTypeName#,
+			#transGroupType#,#transEffDate:DATE#,#transRepricingDate:DATE#,#transRID#,#transLinkID#,#transGroupID#,#fundingType#,
+			#transReviewCode#,#transComment#,#transTotalAmount#,#transUpdateTimestamp#,#transUpdateUserID#,
+			#riskTypeCode#,#effectiveDate#,#repricingDate#,#repricingFreq#,#outstandingType#,#outstandingRID#,
+			#pricingOptionCode#,#spreadRate#,#hostBankrateBasis:VARCHAR#,#walLStreetBasisCode:VARCHAR#,#loanAlias#,#maturityDate:DATE#,
+			#enrichAccrualPeriod#,#enrichAccuralRule#,#nonBussDayPricingOption#,#setDaysFreq#,#cycleDueDate:DATE#,
+			#adjustDueDate:DATE#,#accuralCycleEndDate:DATE#,#hostBankNetShareAmt#,trim(#facilityCommitTransID#),
+			trim(#facilityCommitTransType#),#facilityCommitTransDesc#,#circleID#,#circleType#,#wssTradeRef#,#processQueueCode#,
+			#argonMsgProcessIndicator#,#breakFundIndicator#,#breakFundingAmount#,#dealerListIndicator#,
+			#versionNum#,#amendmentIndicator#,#riskBookCode#,#riskBookDesc#,#wssSystemID#,#wssCityID#,
+			#wssCounterPartyID#,#wssProductType#,#wssBussAreaCode#,#wssPortfolioCode#,#fundReqRID#,
+			#wssExternalTradeID#,#previosBaseleineValue#,#amendStatusUID#,#amendStatusTimeStamp#,
+			#recordLockIndicator#,#wssMapRef#,#teamCode#,#currentBussDate:DATE#,#intAmount#,#wssStubRef#,#fstWSSPrevTradeRef#
+			)
+	</insert>  
+    
+    
+	<cacheModel id="HistoryCache" type="LRU" readOnly="true">
+		<flushOnExecute statement="LoanIQ_FundMessage.updateFundHistoryObject"/>
+		<flushOnExecute statement="LoanIQ_FundMessage.persistFundHistory"/>
+        <flushInterval hours="24"/> 
+	</cacheModel>	
+
+	<resultMap id="baseLineImageMap" class="com.rbs.rbsgbl.loaniq.funding.datastore.data.FundHistory">
+		<result column="BIT_RID_OUTSTANDNG" property="bptOutTransRID" jdbcType="VARCHAR"/> 
+		<result column="BIT_NUM_VERSION" property="bptNumver" jdbcType="NUMBER"/> 
+		<result column="BIT_NME_ALIAS" property="bptNameAlias" jdbcType="VARCHAR"/> 
+		<result column="BIT_DTE_MATURITY" property="bptDateMaturity" jdbcType="DATE"/> 
+		<result column="BIT_DTE_CYCLE_END" property="bptDateCycleEnd" jdbcType="DATE"/> 
+		<result column="BIT_DTE_CYCLE_DUE" property="bptDateCycleDue" jdbcType="DATE"/> 
+		<result column="BIT_DTE_ADJ_CYCLE" property="bptDateAdjCycle" jdbcType="DATE"/> 
+		<result column="BIT_CDE_HB_RT_BS" property="botCodeHBRtBasis" jdbcType="VARCHAR"/> 
+		<result column="BIT_CDE_ENDTE_RULE" property="bptCodeEndDtRule" jdbcType="VARCHAR"/> 
+		<result column="BIT_CDE_ACR_PERIOD" property="bptCodeAccrperiod" jdbcType="VARCHAR"/> 
+		<result column="BIT_DTE_LAST_REPRICE" property="bptLastRepriceDate" jdbcType="VARCHAR"/> 
+	 </resultMap>
+	
+	<resultMap id="ostTranCOFSharePercentage" class="com.rbs.rbsgbl.loaniq.funding.datastore.data.COFSharePercentageDTO">
+		<result column="TXN_BRANCH" property="transBranch" jdbcType="VARCHAR"/> 
+		<result column="TXN_EXPENSE" property="transExpense" jdbcType="VARCHAR"/> 
+		<result column="TXN_PORTFOLIO" property="transPortfolio" jdbcType="VARCHAR"/>
+		<result column="TXN_RATE" property="transRate" jdbcType="VARCHAR"/>
+		<result column="PORT_AMOUNT" property="portAmount" jdbcType="VARCHAR"/>
+		<result column="TXN_FUNDING_TYPE" property="transFundingType" jdbcType="VARCHAR"/>
+	</resultMap>
+	 
+	<select id="fetchFundHistoryObject" resultMap="baseLineImageMap"  cacheModel="HistoryCache">	
+		select * from rbsgbl_baseline_image 
+		where BIT_RID_OUTSTANDNG IN <iterate property="fundReqIds"  open="(" close=")" conjunction=",  "> #fundReqIds[]# </iterate>
+	</select>
+
+	<!--<statement id="updateFundHistoryObject" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.FundHistory"  cacheModel="HistoryCache">
+		update rbsgbl_baseline_image 
+		set BIT_NME_ALIAS=#bptNameAlias#,
+			BIT_CDE_HB_RT_BS=#botCodeHBRtBasis#,
+			BIT_DTE_MATURITY=#bptDateMaturity#,
+			BIT_CDE_ACR_PERIOD=#bptCodeAccrperiod#,
+			BIT_DTE_CYCLE_DUE=#bptDateCycleDue:DATE#,
+			BIT_DTE_ADJ_CYCLE=#bptDateAdjCycle:DATE#,
+			BIT_DTE_CYCLE_END=#bptDateCycleEnd:DATE#,
+			BIT_CDE_ENDTE_RULE=trim(#bptCodeEndDtRule#),
+			BIT_NUM_VERSION=BIT_NUM_VERSION+1 
+		where 
+			BIT_RID_OUTSTANDNG = #bptOutTransRID#
+			-->
+	<statement id="updateFundHistoryObject" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.OstCOF"  cacheModel="HistoryCache">		
+			update rbsgbl_baseline_image 
+			set BIT_NME_ALIAS=#ostAlias#,
+			BIT_CDE_HB_RT_BS=#ostHBRateBasis#,
+			BIT_DTE_MATURITY=#ostMatDate#,
+			BIT_CDE_ACR_PERIOD=#ostAccuralPeriod#,
+			BIT_DTE_CYCLE_DUE=#ostAccuralCycleDue:DATE#,
+			BIT_DTE_ADJ_CYCLE=#ostAccuralCycleAdj:DATE#,
+			BIT_DTE_CYCLE_END=#ostAccuralCycleEnd:DATE#,
+			BIT_DTE_LAST_REPRICE=#ostEffDate:DATE#,
+			BIT_CDE_ENDTE_RULE=trim(#ostAccuralRule#),
+			BIT_NUM_VERSION=BIT_NUM_VERSION+1 
+		where 
+			BIT_RID_OUTSTANDNG = trim(#ostRID#)
+	</statement>
+	
+	
+	<select id ="ostTranCOFSharePercentageWithoutCircleID" parameterClass="java.util.Map" resultMap="ostTranCOFSharePercentage">	
+		SELECT	
+			OCS_CDE_BRANCH	AS TXN_BRANCH,
+			OCS_CDE_EXPENSE	AS TXN_EXPENSE,
+			OCS_CDE_PORTFOLIO	AS TXN_PORTFOLIO,
+			OCS_PCT_RATE		AS TXN_RATE,		
+			SUM(OCS_AMT_AMOUNT) AS PORT_AMOUNT,	
+			'MF'				AS TXN_FUNDING_TYPE  	
+		FROM  	
+			VLS_OST_COF_SHR 
+		WHERE	
+			OCS_RID_OUTSTANDNG =  #ostRID#  
+			AND OCS_CDE_FUNDG_TYPE = 'MF'
+		GROUP BY
+		    OCS_CDE_BRANCH,
+			OCS_CDE_EXPENSE,
+			OCS_CDE_PORTFOLIO,
+			OCS_PCT_RATE			
+	</select>
+	
+	<select id = "ostTranCOFSharePercentageWithCircleID" parameterClass="java.util.Map" resultMap="ostTranCOFSharePercentage">
+		SELECT
+			FPP_AMT_CLOSED_POS / FHA_AMT_NET AS PORT_AMOUNT,  
+			FPP_CDE_BRANCH AS TXN_BRANCH,
+			FPP_CDE_EXPENSE AS TXN_EXPENSE,
+			FPP_CDE_PORTFOLIO AS TXN_PORTFOLIO,
+			OCS_PCT_RATE AS TXN_RATE
+		FROM
+			VLS_FAC_PORT_POS,
+			VLS_FAC_HOST_AGR,
+			VLS_OUTSTANDING,
+			VLS_OST_COF_SHR
+		WHERE
+			FPP_PID_FACILITY = FHA_PID_FACILITY
+			AND FHA_PID_FACILITY = OST_PID_FACILITY
+			AND OST_RID_OUTSTANDNG = OCS_RID_OUTSTANDNG
+			AND FPP_CDE_BRANCH = OCS_CDE_BRANCH
+			AND FPP_CDE_EXPENSE = OCS_CDE_EXPENSE
+			AND FPP_CDE_PORTFOLIO = OCS_CDE_PORTFOLIO
+			AND OCS_cde_FUNDG_TYPE = 'MF'
+			AND OCS_RID_OUTSTANDNG = #ostRID#			
+	</select>
+	
+	<select id = "ostTranCOFSharePercentageQuery" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.OstCOF" resultMap="ostTranCOFSharePercentage">
+		SELECT	
+			OCS_CDE_BRANCH	    AS TXN_BRANCH,
+			OCS_CDE_EXPENSE	    AS TXN_EXPENSE,
+			OCS_CDE_PORTFOLIO	AS TXN_PORTFOLIO,		
+			OCS_PCT_RATE		AS TXN_RATE,
+			SUM(OCS_AMT_AMOUNT) AS PORT_AMOUNT,
+			'MF'				AS TXN_FUNDING_TYPE 		
+		FROM  	
+			VLS_OST_COF_SHR 
+		WHERE	
+			OCS_RID_OUTSTANDNG = #ostRID# 
+			AND OCS_CDE_FUNDG_TYPE = 'MF'
+		GROUP BY
+		    OCS_CDE_BRANCH,
+			OCS_CDE_EXPENSE,
+			OCS_CDE_PORTFOLIO,
+			OCS_PCT_RATE
+	</select>
+	
+	<resultMap id="baseLinePortfolioMap" class="com.rbs.rbsgbl.loaniq.funding.datastore.data.BaseLinePortfolio">
+		<result column="BPT_RID_OUTSTANDNG" property="bptOutstandRID" jdbcType="VARCHAR"/> 
+		<result column="BPT_RID_TRAN" property="bptOutTransRID" jdbcType="VARCHAR"/> 
+		<result column="BPT_CDE_BRANCH" property="bptBranchCode" jdbcType="VARCHAR"/> 
+		<result column="BPT_CDE_EXPENSE" property="bptExpenseCode" jdbcType="VARCHAR"/> 
+		<result column="BPT_CDE_PORTFOLIO" property="bptPortfolioCode" jdbcType="VARCHAR"/> 
+		<result column="BPT_WSS_EXT_TRADE_ID" property="bptWssExtTradeID" jdbcType="VARCHAR"/> 
+		<result column="BPT_PCT_RATE" property="bptPctRate" jdbcType="Number"/>
+		<result column="BPT_DTE_CYCLE_STRT" property="bptCycleStartDate" jdbcType="DATE"/>
+		<result column="BPT_DTE_CYCLE_END" property="bptCycleEndDate" jdbcType="DATE"/>
+	 </resultMap>
+	
+	<select id = "baselinePortfolio" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.COFSharePercentageDTO" resultMap = "baseLinePortfolioMap">
+		select * from RBSGBL_BASELINE_PORTFOLIO 
+			where BPT_RID_OUTSTANDNG =trim(#ostRID#) and
+			BPT_CDE_BRANCH=trim(#transBranch#) 
+			and BPT_CDE_EXPENSE=trim(#transExpense#) 
+			and BPT_CDE_PORTFOLIO=trim(#transPortfolio#)
+			and BPT_PCT_RATE = trim(#transRate#)
+			AND BPT_DTE_CYCLE_STRT = trim(#effectiveDate:DATE#)
+			AND BPT_DTE_CYCLE_END = trim(#accuralCycleEndDate:DATE#)
+			<![CDATA[
+	     	AND (BPT_IND_SETTLE IS NULL OR (BPT_IND_SETTLE IS NOT NULL AND BPT_IND_SETTLE <> 'Y'))
+	     	]]>
+	</select>
+
+	<select id = "findWSSTradeID" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.FundMessage" resultClass = "hashmap">
+			select BPT_WSS_EXT_TRADE_ID from RBSGBL_BASELINE_PORTFOLIO 
+			where BPT_RID_OUTSTANDNG = trim(#outstandingRID#)
+		 	AND BPT_CDE_BRANCH = trim(#branchCode#) 
+			and BPT_CDE_EXPENSE=trim(#expenseCode#) 
+			and BPT_CDE_PORTFOLIO=trim(#portfolioCode#)
+			and BPT_PCT_RATE = trim(#pctRate#)
+			AND BPT_DTE_CYCLE_STRT = trim(#effectiveDate:DATE#)
+			AND BPT_DTE_CYCLE_END = trim(#accuralCycleEndDate:DATE#)
+			<![CDATA[
+	     		 AND (BPT_IND_SETTLE IS NULL OR (BPT_IND_SETTLE IS NOT NULL AND BPT_IND_SETTLE <> 'Y'))
+	     	]]>
+
+	</select>
+
+<!--
+	<update id = "updateBaselinePort" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.BaseLinePortfolio">
+		update rbsgbl_baseline_portfolio 
+		set 
+		where bpt_rid_outstandng=#bptOutstandRID#
+	</update>
+-->
+	<statement id="persistFundHistory"	parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.FundHistory"  cacheModel="HistoryCache">
+		INSERT INTO RBSGBL_BASELINE_IMAGE( 
+		BIT_RID_OUTSTANDNG,BIT_NUM_VERSION,BIT_NME_ALIAS,BIT_DTE_MATURITY, BIT_DTE_CYCLE_END,BIT_DTE_CYCLE_DUE,
+		BIT_DTE_ADJ_CYCLE,BIT_CDE_HB_RT_BS,BIT_CDE_ENDTE_RULE,BIT_CDE_ACR_PERIOD) 
+		VALUES (
+				#bptOutTransRID#, #bptNumver#,#bptNameAlias#,#bptDateMaturity:DATE#,
+				#bptDateCycleEnd#,#bptDateCycleDue#,#bptDateAdjCycle#,
+				#botCodeHBRtBasis#,#bptCodeEndDtRule#,#bptCodeAccrperiod#) 
+	</statement>
+
+	<select id = "riskBookSQL" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.OstCOF" resultClass="hashmap">
+	<![CDATA[
+		SELECT DISTINCT * FROM (
+			SELECT
+				RSK_CDE_CODE 	AS RISK_BOOK_CDE,
+				RSK_DSC_CODE	AS RISK_BOOK_DSC
+			FROM	
+				VLS_RISK_PORT_EXP
+				LEFT OUTER JOIN VLS_RISK_BOOK ON
+				RPE_CDE_RISK_BOOK = RSK_CDE_CODE
+			WHERE	
+				trim(RPE_CDE_EXPENSE) = trim(#transExpense#)     
+				AND trim(RPE_CDE_PORTFOLIO) = trim(#transPortfolio#) 
+			) 
+		]]>	
+	</select>
+	
+	<select id = "riskBookSQLWithDepos" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.OstCOF" resultClass="hashmap">
+			<![CDATA[
+			SELECT DISTINCT * FROM (
+			SELECT
+               CASE WHEN LENGTH(TRIM(TRANSLATE(#transExpense#, ' +-.0123456789', ' ')))>0 THEN STATIC_VALUE_4
+                	ELSE STATIC_VALUE_3 
+               END 
+               AS RISK_BOOK_CDE,
+                ''               AS RISK_BOOK_DSC
+            FROM
+                RBSGBL_STATIC_DETAILS
+            WHERE
+                trim(KEY_VALUE_1) = trim(#transBranch#) AND
+                trim(KEY_VALUE_2) = trim(#transRiskType#) AND
+                trim(STATIC_TYPE_ID) = 'FND03'
+             )
+             ]]>	
+	</select>
+	
+
+	<select id ="repricingDateForRCMF" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.OstCOF" resultClass="date">
+		SELECT TO_DATE(OTR_DTE_REPRICING, 'DD-MM-YY')
+		FROM	
+			VLS_OST_TRAN
+		WHERE 
+		<![CDATA[
+
+		   OTR_RID_GROUP_TRAN = trim(#transGroupID#)
+		   AND OTR_CDE_TYPE = 'PRDCR'
+		   AND OTR_CDE_OBJ_STATE  <>'CNCLD' order by OTR_DTE_REPRICING
+		   ]]>	
+	</select>	
+
+	<select id="findFundMessage" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.OstCOF"  resultClass="hashmap">
+
+		select FST_IND_AF_MSG_PROCESS,FST_WSS_ACTION_TYPE,FST_CDE_OBJ_STATE,FST_PCT_RATE,FST_RID_FUND_REQ,FST_WSS_TRADE_REF,FST_WSS_MAP_REF,FST_CDE_AMEND_STATUS from rbsgbl_funding_stage 
+			WHERE FST_RID_TRAN=trim(#transID#) 
+			AND FST_CDE_BRANCH=trim(#transBranch#)
+			AND FST_CDE_EXPENSE=trim(#transExpense#) 
+			AND FST_CDE_PORTFOLIO=trim(#transPortfolio#) 		
+			AND (DECODE(TRIM(FST_CDE_TR_TYPE),'MIG','1') = '1' OR
+                 FST_TXN_COF_RID = trim(#transCOFRID:VARCHAR#)
+                )
+			<![CDATA[
+			AND rownum<=1 order by FST_TSP_REC_UPDATE
+				]]>	
+	</select>
+	
+	<insert id="insertPortfolioAllocRecord" parameterClass = "com.rbs.rbsgbl.loaniq.funding.datastore.data.BaseLinePortfolio">
+		INSERT INTO RBSGBL_BASELINE_PORTFOLIO 
+		(
+			BPT_RID_OUTSTANDNG,
+			BPT_RID_TRAN,
+			BPT_CDE_BRANCH,
+			BPT_CDE_EXPENSE,
+			BPT_CDE_PORTFOLIO,
+			BPT_WSS_EXT_TRADE_ID,
+			BPT_PCT_RATE,
+			BPT_DTE_CYCLE_STRT,
+			BPT_DTE_CYCLE_END,
+			BPT_WSS_MAP_REF,
+			BPT_IND_SETTLE
+		)
+		VALUES
+		(
+			#bptOutstandRID#,
+			#bptOutTransRID#,
+			#bptBranchCode#,
+			#bptExpenseCode#,
+			#bptPortfolioCode#,
+			#bptWssExtTradeID#,
+			#bptPctRate#,
+			#bptCycleStartDate#,
+			#bptCycleEndDate#,
+			#bptWssMapRef#,
+			#bptIndSettle#
+		)
+	</insert>
+	
+	<update id="updatePollTimestamp" parameterClass="hashmap">
+		<![CDATA[
+			UPDATE RBSGBL_FUNDING_ENV 
+			set OST_POLLER_TIME =#ostPollerTime#
+			
+		]]>	 
+		<!-- ACCR_CYCLE_POLLER_TIME=#accrCyclePollerTime:DATE#-->
+	</update>
+	
+	<select id="fetchPollTime" resultClass="hashmap">					
+		select OST_POLLER_TIME,ACCR_CYCLE_POLLER_TIME,POLL_TIME_DIFF from RBSGBL_FUNDING_ENV	 	   	
+	</select>  
+	
+		<update id="updateFundMessageForRELSD" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.FundMessage">
+			Update RBSGBL_FUNDING_STAGE set 
+				FST_CDE_OBJ_STATE =#transStatus#,	
+				FST_TSP_REC_UPDATE =#transUpdateTimestamp#,	
+				FST_UID_REC_UPDATE =#transUpdateUserID#,
+				FST_CDE_RISK_TYPE  = #riskTypeCode#,
+				FST_DTE_EFFECTIVE =	#effectiveDate#,
+				FST_DTE_TR_REPRICING =#repricingDate#,
+				FST_CDE_REPR_FQ  =	#repricingFreq#,
+				FST_CDE_OST_TYPE =	#outstandingType#,
+				FST_RID_OUTSTANDNG =#outstandingRID#,
+				FST_CDE_OPTION 	=	#pricingOptionCode#,
+				FST_PCT_SPREAD 	=	#spreadRate#,
+				FST_CDE_HB_RT_BS =	#hostBankrateBasis# ,
+				FST_NME_ALIAS 	=	#loanAlias#,
+				FST_DTE_MATURITY =	#maturityDate:DATE# ,
+				FST_CDE_ACR_PERIOD = #enrichAccrualPeriod#,
+				FST_CDE_ENDTE_RULE = #enrichAccuralRule#,
+				FST_CDE_NONBUS_DAY = #nonBussDayPricingOption#,
+				FST_NUM_SET_FREQ =	#setDaysFreq#
+
+			where
+				FST_RID_FUND_REQ =#fundReqRID#
+		</update>
+	
+		<update id="updateFundMessage" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.FundMessage">
+		
+				Update RBSGBL_FUNDING_STAGE set 
+				
+					FST_CDE_TXN_CLASS =#transClassType#,
+					FST_CDE_BRANCH =#branchCode#,
+					FST_CDE_EXPENSE =#expenseCode#,
+					FST_CDE_PORTFOLIO =#portfolioCode#,
+					FST_AMT_FUND =#fundAmount#,
+					FST_PCT_RATE =#pctRate#,
+					FST_PID_DEAL =#dealPID#,
+					FST_NME_DEAL =#dealName#,
+					FST_PID_FACILITY =#facilityPID#,
+					FST_NME_FACILITY =#facilityName#,
+					FST_CDE_CURRENCY =#currencyCode#,
+					FST_CID_BORROWER =#borrowerCode#,
+					FST_NME_FULL_NAME =#borrowerFullName# ,
+					FST_NME_SHORT_NAME =#borrowerShortName# ,
+					FST_RID_CUS_SVC_GR =#borrowerServiceGroup# ,
+					FST_CDE_OBJ_STATE =#transStatus#,
+					FST_CDE_TR_TYPE =#transTypeCode#,
+					FST_NME_TR_TYPE =#transTypeName#,
+					FST_CDE_TR_GROUP_TYPE =#transGroupType#,
+					FST_DTE_TR_EFFECTIVE =#transEffDate:DATE#,
+					FST_DTE_TR_REPRICING =#transRepricingDate:DATE#,
+					FST_RID_GROUP_TRAN =#transGroupID#,
+					FST_CDE_FUNDG_TYPE =#fundingType#,
+					FST_CDE_REVIEW =#transReviewCode#,
+					FST_TXT_COMMENT =#transComment#,
+					FST_AMT_TR =#transTotalAmount#,
+					FST_TSP_REC_UPDATE =#transUpdateTimestamp#,
+					FST_UID_REC_UPDATE =#transUpdateUserID:DATE#,
+					FST_CDE_RISK_TYPE =#riskTypeCode#,
+					FST_DTE_EFFECTIVE =#effectiveDate:DATE#,
+					FST_DTE_REPRICE =#repricingDate:DATE#,
+					FST_CDE_REPR_FQ =#repricingFreq#,
+					FST_CDE_OST_TYPE =#outstandingType#,
+					FST_RID_OUTSTANDNG =#outstandingRID#,
+					FST_CDE_OPTION =#pricingOptionCode#,
+					FST_PCT_SPREAD =#spreadRate#,
+					FST_CDE_HB_RT_BS =#hostBankrateBasis#,
+					FST_CDE_WSS_RATE_BASIS =#walLStreetBasisCode:VARCHAR#,
+					FST_NME_ALIAS =#loanAlias#,
+					FST_DTE_MATURITY =#maturityDate:DATE#,
+					FST_CDE_ACR_PERIOD =#enrichAccrualPeriod#,
+					FST_CDE_ENDTE_RULE =#enrichAccuralRule#,
+					FST_CDE_NONBUS_DAY =#nonBussDayPricingOption#,
+					FST_NUM_SET_FREQ =#setDaysFreq#,
+					FST_DTE_CYCLE_DUE =#cycleDueDate:DATE#,
+					FST_DTE_ADJ_CYCLE =#adjustDueDate:DATE#,
+					FST_DTE_CYCLE_END =#accuralCycleEndDate:DATE#,
+					FST_AMT_BANK_NET =#hostBankNetShareAmt#,
+					FST_RID_FAC_TXN_ID =trim(#facilityCommitTransID#),
+					FST_CDE_FAC_TXN_TYPE =trim(#facilityCommitTransType#),
+					FST_NME_FAC_TXN_TYPE =#facilityCommitTransDesc#,
+					FST_IID_INV_ID =#circleID#,
+					FST_CDE_IDE_TRANS_TYPE = #circleType#,
+					FST_WSS_TRADE_REF =#wssTradeRef#,
+					FST_CDE_PROCESS_QUEUE =#processQueueCode#,
+					FST_IND_AF_MSG_PROCESS =#argonMsgProcessIndicator#,
+					FST_IND_BREAK_FUND =#breakFundIndicator#,
+					<!-- FST_AMT_BREAK_FUND_FEE =#breakFundingAmount#, Not included -->
+					FST_IND_DEALER_LIST =#dealerListIndicator#,
+					FST_NUM_VERSION =#versionNum#,
+					FST_CDE_AMEND_STATUS =#amendmentIndicator#,<!-- Not included Doubtfull-->
+					FST_CDE_RISK_BOOK =#riskBookCode#,
+					FST_DSC_RISK_BOOK =#riskBookDesc#,
+					FST_WSS_INT_ID =#wssSystemID#,
+					FST_WSS_CITY_CDE =#wssCityID#,
+					FST_WSS_CPTY_ID =#wssCounterPartyID#,
+					FST_WSS_PROD_TYPE =#wssProductType#,
+					FST_WSS_BUS_AREA =#wssBussAreaCode#,
+					FST_WSS_PORTFOLIO =#wssPortfolioCode#,
+					FST_WSS_MAP_REF = #wssMapRef#,
+					FST_RID_FUND_REQ =#fundReqRID#,
+					FST_WSS_EXT_TRADE_ID =#wssExternalTradeID#,
+					FST_WSS_STUB_REF=#wssStubRef#,
+					FST_TXT_PREV_VALUE =#previosBaseleineValue#,
+					<!--FST_UID_AMEND_STATUS =#amendStatusUID#, Not included -->
+					<!--FST_TSP_AMEND_STATUS =#amendStatusTimeStamp#,  Not included -->
+					<!--FST_IND_REC_LOCK =#recordLockIndicator#, Not included -->
+					FST_DTE_BUSINESS=#currentBussDate:DATE#
+
+				where
+					FST_RID_FUND_REQ =#fundReqRID#
+	
+	</update>
+
+	<update id="updateFundMessageStatus" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.FundMessage">
+				UPDATE RBSGBL_FUNDING_STAGE SET 
+				FST_IND_AF_MSG_PROCESS =#argonMsgProcessIndicator#
+				WHERE
+				FST_RID_FUND_REQ =#fundReqRID#	
+	</update>
+	
+	<update id="updateWssStubRef" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.FundMessage">
+				UPDATE RBSGBL_FUNDING_STAGE SET 
+				FST_WSS_STUB_REF =#wssStubRef#
+				WHERE
+				FST_RID_FUND_REQ =#fundReqRID#	
+	</update>
+	
+	<select id="wssRollover" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.FundMessage" resultClass="hashmap">
+		SELECT COUNT (*) WSSROLLOVER
+		FROM	
+		RBSGBL_FUNDING_STAGE
+		WHERE 
+			FST_RID_OUTSTANDNG =trim(#outstandingRID#) AND
+            FST_CDE_BRANCH =trim(#branchCode#) AND
+            FST_CDE_EXPENSE =trim(#expenseCode#) AND
+            FST_CDE_PORTFOLIO =trim(#portfolioCode#) 
+            AND FST_CDE_TR_TYPE IN ('QRADJ','QLRPR','QDRPR','DQADJ')
+            
+	</select>
+	
+	<select id="fundSeqID" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.FundMessage" resultClass="hashmap">
+		SELECT COUNT (*) AS FUNDSEQID
+		    FROM RBSGBL_FUNDING_STAGE
+		WHERE 
+			FST_RID_OUTSTANDNG =trim(#outstandingRID#) AND
+		    <!--FST_RID_TRAN       =trim(#transRID#) AND -->
+            FST_CDE_BRANCH     =trim(#branchCode#) AND
+            FST_CDE_EXPENSE    =trim(#expenseCode#) AND
+            FST_CDE_PORTFOLIO  =trim(#portfolioCode#) 
+	</select>	
+	
+	<update id="updateFundMessageWallStTradeRef" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.FundMessage">
+		UPDATE rbsgbl_funding_stage SET FST_WSS_TRADE_REF =#wssTradeRef#	
+	</update>
+	
+	<select id="currentSystemDate" parameterClass = "java.util.Map" resultClass="date">
+	  SELECT TO_DATE (env_txt_var_value, 'MM-DD-YYYY') currentSystemDate
+		  FROM vls_environment 
+		  WHERE env_nme_var_class 
+				IN (select BRN_CDE_TME_REGION FROM VLS_BRANCH WHERE BRN_CDE_BRANCH =#transBranch#)
+		  AND env_nme_var_name LIKE '%Current Business Date%'  
+	</select>
+
+
+	 <insert id="persistAutoFundMessage" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.AutoFund"> 
+		<selectKey keyProperty="aftAppIDRID"> 
+			SELECT rbsgbl_funding_msg_seq.NEXTVAL FROM DUAL 
+		</selectKey> 		
+	 	INSERT INTO rbsgbl_auto_fund (
+	 		AFT_WSS_TRADE_REF,AFT_WSS_INT_ID,AFT_WSS_CITY_CDE,AFT_CDE_MSG_TYPE,
+			AFT_CDE_TRADE_TYPE,AFT_CDE_AMEND_TYPE,AFT_WSS_PROD_TYPE,AFT_WSS_BUS_AREA ,
+			AFT_WSS_PORTFOLIO,AFT_CDE_CURRENCY,AFT_PCT_RATE,AFT_CDE_RATE_TYPE,
+			AFT_AMT_FUND,AFT_IND_INT_FLAG,AFT_DTE_START,AFT_DTE_TRADE,AFT_DTE_MATURITY,
+			AFT_WSS_CPTY_ID,AFT_CDE_WSS_RATE_BASIS,AFT_CDE_RATE_INDEX,AFT_WSS_TRADER_ID,
+			AFT_RID_CUST_REF,AFT_DSC_REMARK_2,AFT_DSC_REMARK_1,AFT_DSC_REMARK_3,AFT_DSC_CANCEL_REASON,
+			AFT_CDE_BF_FEE,AFT_DTE_BF_FEE,AFT_NUM_BF_FEE,AFT_WSS_PREV_ID,AFT_RID_SEQ_ID,AFT_RID_APP_ID,
+			AFT_TSP_SENT_ARGON,AFT_CDE_MSG_STATUS,AFT_CDE_ACK_STATUS,AFT_TSP_ACK,AFT_WSS_INT_TRADE_ID,
+			AFT_WSS_EXT_TRADE_ID,AFT_RID_FUND_REQ,AFT_TSP_REC_UPDATE,AFT_UID_REC_UPDATE,AFT_WSS_MAP_REF,AFT_CDE_TEAM,AFT_OLD_WSS_MAP_REF, 
+			AFT_WSS_CUST_REF		
+	 	)
+	 	VALUES
+	 	(
+			#aftWSSTradeRef#,#aftWSSIntID#,#aftCityCode#,#aftMsgType#,#aftTradeTypeCode:VARCHAR#,
+			#aftAmendTypeCode#,#aftWSSProdType#,#aftWSSBusArea#,
+			#aftWSSPortfolio#,#aftCurrencyCode#,#aftPctRate#,#aftRateTypeCode#,
+			#aftFundAmount#,#aftIndIntFlag#,#aftStartDate:DATE#,#aftTradeDate:DATE#,#aftMaturityDate:DATE#,
+			#aftWSSCounterPartyID#,#aftWSSRateBasisCode#,#aftCodeRateIndex#,#aftWSSTraderID#,
+			#aftCustRefRID#,#aftDSCRemark2#,#aftDSCRemark1#,#aftDSCRemark3#,#aftDSCCancelReason#,
+			#aftFeeBFCode#,#aftFeeBFDate#,#aftFeeBFNum#,#aftWSSPrevID#,#aftSeqIDRID#,#aftAppIDRID#,
+			#aftArgonSentTimestamp:DATE#,#aftMSGStatusCode#,#aftACKStatusCode#,#aftACkTimestamp:DATE#,
+			#aftWSSIntTradeID#,#aftWSSExtTradeID#,#aftFundReqRID#,#aftRecUpdateTSP#,#aftRecUpdateUID#,#aftWssMapRef#,#teamCode#,
+			#aftOldWSSMapRef#,#aftWssCustRef#
+	 	)
+	 </insert>
+	 
+	 <insert id="persistAmendComments" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.AmdTransComment">		
+	 	INSERT INTO RBSGBL_AMEND_COMMENTS (
+		 	ACT_RID_FUND_REQ,
+		 	ACT_RID_COMMENT,
+		 	ACT_DSC_COMMENT,
+		 	ACT_TSP_REC_CREATE,
+		 	ACT_UID_REC_CREATE)
+	 	VALUES
+	 	(
+			#actFundReqRID#,
+			(SELECT COUNT(*)+1 FROM RBSGBL_AMEND_COMMENTS WHERE ACT_RID_FUND_REQ  =#actFundReqRID# ),
+			#actDSCComment#,
+			#actRecCreateTSP#,
+			#actRecCreateUID#
+	 	)
+	 </insert>
+	 
+	 
+	 <select id="checkAutoFundExist" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.AutoFund" resultClass="hashmap">
+		select COUNT(*) AS AutoFundCount  
+		from RBSGBL_AUTO_FUND 
+		WHERE AFT_WSS_MAP_REF = #aftWssMapRef# 
+	</select>
+	
+	
+	<insert id="insertWSSMapRef" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.WSSMapper">
+		INSERT INTO RBSGBL_WSS_REF_MAPPING (
+		    WRM_WSS_GEN_COUNT,		 	
+		 	WRM_DTE_TR_EFFECTIVE
+		)
+	 	VALUES
+	 	(
+			#wssGenCount#+1,
+			#wssTransUpdateTSP#
+	 	)
+	</insert>
+	
+	<update id="updateWSSMapRef" parameterClass="string">
+		UPDATE RBSGBL_WSS_REF_MAPPING SET 
+		WRM_WSS_GEN_COUNT = WRM_WSS_GEN_COUNT+1
+		WHERE WRM_DTE_TR_EFFECTIVE = to_date(#wssTransUpdateTSP#,'DD/MM/YYYY')
+	</update>	
+	
+	<select id="wssMapCount" parameterClass="string" resultClass="int">
+		SELECT WRM_WSS_GEN_COUNT AS WSSGENCOUNT
+		FROM RBSGBL_WSS_REF_MAPPING
+		WHERE WRM_DTE_TR_EFFECTIVE = to_date(#transUpdateTimestamp#,'DD/MM/YYYY')				
+	</select>
+	
+	<select id = "fetchWSSMapRef" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.FundMessage" resultClass = "hashmap">
+	SELECT
+		 BPT_WSS_EXT_TRADE_ID,
+		 BPT_WSS_MAP_REF,
+		 BPT_IND_SETTLE
+	FROM
+		 RBSGBL_BASELINE_PORTFOLIO
+	WHERE
+		 BPT_RID_OUTSTANDNG = trim(#outstandingRID#)
+		 AND BPT_CDE_BRANCH = trim(#branchCode#)
+		 AND BPT_CDE_EXPENSE = trim(#expenseCode#)
+		 AND BPT_CDE_PORTFOLIO = trim(#portfolioCode#)
+		 AND BPT_PCT_RATE = trim(#pctRate#)
+			
+		 AND BPT_DTE_CYCLE_STRT =  trim(#effectiveDate:DATE#)
+		 AND BPT_DTE_CYCLE_END = trim(#accuralCycleEndDate:DATE#)
+	</select>
+	
+	
+	
+	<select id = "fetchMIGInd" resultClass = "string">
+	SELECT 
+		MIG_START_IND 
+	FROM
+	  RBSGBL_FUNDING_ENV 
+	
+	</select>
+	
+	<select id = "fetchDealMIGInd" parameterClass="string" resultClass = "string">
+	SELECT 
+		RBS_LIQ.rbsgbl_deal_conversion_stat(#txnDealRID#,'FUNDING',RBSGBL_SGL_GLOBAL.curr_buss_dt)
+	FROM
+	  DUAL 
+	
+	</select>
+	
+	<select id = "fetchDealMIGIndForOSTPoller" parameterClass="string" resultClass = "string">
+	SELECT 
+		RBS_LIQ.rbsgbl_deal_conversion_stat(#txnDealRID#,'FUNDING')
+	FROM
+	  DUAL 
+	
+	</select>
+	
+	<select id = "fetchPrePaidLoanObj" parameterClass="hashmap" resultClass = "int">
+		select COUNT(*) from RBSGBL_MIG_PREPAID_LOANS where MPL_RID_OUTSTANDNG = #mplOstRID#  AND MPL_RID_TRAN = #mplTranRID#
+	
+	</select>
+	
+	<insert id="insertFundExcelObject" parameterClass="com.rbs.rbsgbl.loaniq.funding.business.FundMIGExcelObject">	
+		
+		INSERT INTO RBSGBL_MIG_PREPAID_LOANS (MPL_RID_OUTSTANDNG,MPL_DTE_EFFECTIVE,MPL_RID_TRAN)
+		VALUES
+		(#mplOstRID#,to_date(#mplEffDate#,'DD/MM/YYYY'),#mplTranRID#)
+	</insert>	
+	
+	<update id="updateSettlementIndicator" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.FundMessage">
+				 <![CDATA[
+				UPDATE RBSGBL_BASELINE_PORTFOLIO  SET 
+					BPT_IND_SETTLE ='Y'
+				WHERE
+				BPT_RID_OUTSTANDNG = trim(#outstandingRID#)
+				AND BPT_CDE_BRANCH = trim(#branchCode#)
+				AND BPT_CDE_EXPENSE = trim(#expenseCode#)
+				AND BPT_CDE_PORTFOLIO = trim(#portfolioCode#)
+				AND BPT_PCT_RATE = trim(#pctRate#)
+				AND BPT_DTE_CYCLE_STRT =  trim(#effectiveDate:DATE#)
+				AND BPT_DTE_CYCLE_END = trim(#accuralCycleEndDate:DATE#)
+				 ]]>
+	</update>
+	
+	
+	<select  id = "fetchPreviousLegInfo" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.FundMessage" resultClass = "hashmap">
+	
+		SELECT OTC_CDE_BRANCH,OTC_CDE_EXPENSE,OTC_CDE_PORTFOLIO,OTC_PCT_RATE
+  			FROM VLS_OST_TRAN
+        LEFT OUTER JOIN VLS_OST_TR_COF_SHR ON
+        OTR_RID_OST_TRAN = OTC_RID_OST_TRAN
+  	  WHERE 
+	  	<![CDATA[
+	       OTR_RID_OST_TRAN = #transRID# AND
+	       OTC_RID_OST_TR_COF <> #transCOFRID#
+	     ]]>
+	</select>
+	
+	<select id = "fetchBptExtTradeID" parameterClass="com.rbs.rbsgbl.loaniq.funding.datastore.data.FetchWSSExternalTradeDTO" resultClass = "string">
+	SELECT
+		 BPT_WSS_EXT_TRADE_ID
+	FROM
+	 	 RBSGBL_BASELINE_PORTFOLIO
+	WHERE
+		 BPT_RID_OUTSTANDNG = trim(#currLegOstRID#)
+		 AND BPT_CDE_BRANCH = trim(#preLegBranch#)
+		 AND BPT_CDE_EXPENSE = trim(#prelegExpense#)
+		 AND BPT_CDE_PORTFOLIO = trim(#preLegPortfolio#)
+		 AND BPT_PCT_RATE = trim(#preLegPctRate#)
+		
+		 AND BPT_DTE_CYCLE_STRT =  trim(#currLegEffDate:DATE#)
+		 AND BPT_DTE_CYCLE_END = trim(#currLegOstAccEndDate:DATE#)	
+		 <![CDATA[
+	     	AND (BPT_IND_SETTLE IS NULL OR (BPT_IND_SETTLE IS NOT NULL AND BPT_IND_SETTLE <> 'Y'))
+	     ]]>	
+	</select>
+	
+	
+</sqlMap>

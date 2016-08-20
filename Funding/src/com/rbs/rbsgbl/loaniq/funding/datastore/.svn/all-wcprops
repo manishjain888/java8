@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/7334/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore
+END
+AutoFundMessageBSImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/AutoFundMessageBSImpl.java
+END
+OstPoller.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3900/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/OstPoller.xml
+END
+FundStaticDetail.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/FundStaticDetail.xml
+END
+AccuralPoller.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/AccuralPoller.xml
+END
+MigPoller.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/7334/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/MigPoller.xml
+END
+FundDataProcessDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/7277/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/FundDataProcessDAO.java
+END
+AutoFundingMessageDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/AutoFundingMessageDAO.java
+END
+FundDataProcessDAOSpringImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/7277/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/FundDataProcessDAOSpringImpl.java
+END
+AutoFundMessageBS.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/AutoFundMessageBS.java
+END
+FundMessage.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/7277/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/FundMessage.xml
+END
+outboundMessage.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/7277/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/outboundMessage.xml
+END
+FundRequest.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/FundRequest.xml
+END
+funding-app-maps.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/funding-app-maps.xml
+END
+CircleTrans.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/CircleTrans.xml
+END
+AutoFundingMessageDAOImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/3014/funding/trunk/src/com/rbs/rbsgbl/loaniq/funding/datastore/AutoFundingMessageDAOImpl.java
+END

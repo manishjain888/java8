@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/4222/funding/trunk/config/funding/business
+END
+FundDataProcessorlog4j.properties
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3014/funding/trunk/config/funding/business/FundDataProcessorlog4j.properties
+END
+autofunding_ack_wsmmtrade.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/3014/funding/trunk/config/funding/business/autofunding_ack_wsmmtrade.xsd
+END
+autofunding_wsmmtrade.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/3014/funding/trunk/config/funding/business/autofunding_wsmmtrade.xsd
+END
+AutoFundMsgSenderConfiguration.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/3014/funding/trunk/config/funding/business/AutoFundMsgSenderConfiguration.xml
+END
+FundMessageConf.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/3014/funding/trunk/config/funding/business/FundMessageConf.xml
+END
+FundMessage.properties
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/3014/funding/trunk/config/funding/business/FundMessage.properties
+END
+AutoFundMsgReceiverArgonConf.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/3014/funding/trunk/config/funding/business/AutoFundMsgReceiverArgonConf.xml
+END
+AutoFundingAckLog4j.properties
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/3014/funding/trunk/config/funding/business/AutoFundingAckLog4j.properties
+END
+AutoFundinglog4j.properties
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/3014/funding/trunk/config/funding/business/AutoFundinglog4j.properties
+END

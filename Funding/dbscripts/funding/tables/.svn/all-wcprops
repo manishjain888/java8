@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/5972/funding/trunk/dbscripts/funding/tables
+END
+rbsgbl_auto_fund_parameters.sql
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/5929/funding/trunk/dbscripts/funding/tables/rbsgbl_auto_fund_parameters.sql
+END
+rbsgbl_amend_comments.sql
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/5970/funding/trunk/dbscripts/funding/tables/rbsgbl_amend_comments.sql
+END
+rbsgbl_user_group.sql
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/5970/funding/trunk/dbscripts/funding/tables/rbsgbl_user_group.sql
+END
+rbsgbl_mig_prepaid_loans.sql
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/3014/funding/trunk/dbscripts/funding/tables/rbsgbl_mig_prepaid_loans.sql
+END
+rbsgbl_funding_stage.sql
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/5972/funding/trunk/dbscripts/funding/tables/rbsgbl_funding_stage.sql
+END
+rbsgbl_user_profile.sql
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/3014/funding/trunk/dbscripts/funding/tables/rbsgbl_user_profile.sql
+END
+rbsgbl_baseline_portfolio.sql
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/5970/funding/trunk/dbscripts/funding/tables/rbsgbl_baseline_portfolio.sql
+END
+rbsgbl_funding_env.sql
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/5970/funding/trunk/dbscripts/funding/tables/rbsgbl_funding_env.sql
+END
+rbsgbl_wss_ref_mapping.sql
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/3014/funding/trunk/dbscripts/funding/tables/rbsgbl_wss_ref_mapping.sql
+END
+rbsgbl_auto_fund.sql
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/5972/funding/trunk/dbscripts/funding/tables/rbsgbl_auto_fund.sql
+END
+rbsgbl_baseline_image.sql
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/5970/funding/trunk/dbscripts/funding/tables/rbsgbl_baseline_image.sql
+END
